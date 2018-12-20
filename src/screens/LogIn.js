@@ -20,7 +20,9 @@ export default class logIn extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.wrapper}>
+            <KeyboardAvoidingView
+                style={styles.wrapper}
+                behavior="padding" >
                 <View style={styles.scrollViewWrapper}>
                     <ScrollView style={styles.scrollView}>
                         <Text style={styles.loginHeader}>Log In</Text>
