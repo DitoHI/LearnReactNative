@@ -41,7 +41,7 @@ export default class logIn extends Component {
     }
 
     handleEmailChange(email) {
-        const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;;
+        const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         this.setState({ emailAddress: email  });
         if (!this.state.validEmail) {
             if (emailCheckRegex.test(email)) {
@@ -66,12 +66,8 @@ export default class logIn extends Component {
 
     toggleNextButtonState() {
         const { validEmail, validPassword } = this.state;
-        if (validEmail && validPassword) {
-            return false;
-        }
-        return true;
+        return !(validEmail && validPassword);
     }
-
 
     render() {
         const { formValid, loadingVisible, validEmail, validPassword } = this.state;
