@@ -60,7 +60,7 @@ export default class InputField extends Component {
         const scaleValue = showCheckmark ? 1 : 0;
         this.scaleCheckmark(scaleValue);
 
-        console.log(`${inputType}: ${scaleValue}`);
+        // console.log(`${inputType}: ${scaleValue}`);
         return (
             <View style={[customStyle, styles.wrapper]}>
                 <Text style={[{color, fontSize}, styles.label]}>{labelText}</Text>
