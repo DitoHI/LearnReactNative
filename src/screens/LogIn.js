@@ -25,13 +25,13 @@ export default class logIn extends Component {
     }
 
     handleNextButton() {
-        this.setState({ loadingVisible: true });
+        this.setState({loadingVisible: true});
         setTimeout(() => {
             if (this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
                 alert('Success');
-                this.setState({ formValid: true, loadingVisible: false });
+                this.setState({formValid: true, loadingVisible: false});
             } else {
-                this.setState({ formValid: false, loadingVisible: false });
+                this.setState({formValid: false, loadingVisible: false});
             }
         }, 2000);
     }
@@ -42,14 +42,14 @@ export default class logIn extends Component {
 
     handleEmailChange(email) {
         const emailCheckRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        this.setState({ emailAddress: email  });
+        this.setState({emailAddress: email});
         if (!this.state.validEmail) {
             if (emailCheckRegex.test(email)) {
-                this.setState({ validEmail: true });
+                this.setState({validEmail: true});
             }
         } else {
             if (!emailCheckRegex.test(email)) {
-                this.setState({ validEmail: false });
+                this.setState({validEmail: false});
             }
         }
     }
@@ -57,20 +57,20 @@ export default class logIn extends Component {
     handlePasswordChange(password) {
         if (!this.state.validPassword) {
             if (password.length > 4) { // at least 4 characters long
-                this.setState({ validPassword: true });
+                this.setState({validPassword: true});
             }
         } else if (password <= 4) {
-            this.setState({ validPassword: false });
+            this.setState({validPassword: false});
         }
     }
 
     toggleNextButtonState() {
-        const { validEmail, validPassword } = this.state;
+        const {validEmail, validPassword} = this.state;
         return !(validEmail && validPassword);
     }
 
     render() {
-        const { formValid, loadingVisible, validEmail, validPassword } = this.state;
+        const {formValid, loadingVisible, validEmail, validPassword} = this.state;
         const showNotification = !formValid;
         const background = formValid ? colors.green01 : colors.darkOrange;
         const notificationMarginTop = showNotification ? 10 : 0;
@@ -106,12 +106,10 @@ export default class logIn extends Component {
                             showCheckmark={validPassword}
                         />
                     </ScrollView>
-                    <View style={styles.nextButton}>
-                        <NextArrowButton
-                            handleNextButton={this.handleNextButton}
-                            disabled={this.toggleNextButtonState()}
-                        />
-                    </View>
+                    <NextArrowButton
+                        handleNextButton={this.handleNextButton}
+                        disabled={this.toggleNextButtonState()}
+                    />
                     <View style={[styles.notificationWrapper, {marginTop: notificationMarginTop}]}>
                         <Notification
                             showNotification={showNotification}
@@ -151,11 +149,6 @@ const styles = StyleSheet.create({
         color: colors.white,
         fontWeight: '300',
         marginBottom: 40,
-    },
-    nextButton: {
-        alignItems: 'flex-end',
-        right: 20,
-        bottom: 20,
     },
     notificationWrapper: {
         position: 'absolute',

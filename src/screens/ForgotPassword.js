@@ -4,6 +4,7 @@ import {
     Text,
     KeyboardAvoidingView,
     StyleSheet,
+    ScrollView,
 } from 'react-native';
 import colors from '../styles/colors';
 import InputField from '../components/forms/inputField';
@@ -58,46 +59,46 @@ export default class ForgotPassword extends Component {
     }
 
     handleCloseNotification() {
-        this.setState({ formValid: true });
+        this.setState({formValid: true});
     }
 
     render() {
-        const { loadingVisible, formValid, validEmail } = this.state;
+        const {loadingVisible, formValid, validEmail} = this.state;
         const background = formValid ? colors.green01 : colors.darkOrange;
         const showNotification = !formValid;
         return (
             <KeyboardAvoidingView
                 style={[{backgroundColor: background}, styles.wrapper]}
             >
-                <View style={styles.form}>
-                    <Text style={styles.forgotPasswordHeading}>Forgot Your Password? </Text>
-                    <Text style={styles.forgotPasswordSubheading}>Enter your email to find your account</Text>
-                    <InputField
-                        customStyle={{marginBottom: 30}}
-                        textColor={colors.white}
-                        labelText="EMAIL ADDRESS"
-                        labelTextSize={14}
-                        labelColor={colors.white}
-                        borderBottomColor={colors.white}
-                        inputType="email"
-                        onChangeText={this.handleEmailChange}
-                        showCheckmark={validEmail}
-                    />
-                </View>
-                <View style={styles.nextButtonWrapper}>
+                <View style={styles.scrollViewWrapper}>
+                    <ScrollView style={styles.scrollView}>
+                        <Text style={styles.forgotPasswordHeading}>Forgot Your Password? </Text>
+                        <Text style={styles.forgotPasswordSubheading}>Enter your email to find your account</Text>
+                        <InputField
+                            customStyle={{marginBottom: 30}}
+                            textColor={colors.white}
+                            labelText="EMAIL ADDRESS"
+                            labelTextSize={14}
+                            labelColor={colors.white}
+                            borderBottomColor={colors.white}
+                            inputType="email"
+                            onChangeText={this.handleEmailChange}
+                            showCheckmark={validEmail}
+                        />
+                    </ScrollView>
                     <NextArrowButton
                         handleNextButton={this.goToNextStep}
                         disabled={!validEmail}
                     />
-                </View>
-                <View>
-                    <Notification
-                        type="Error"
-                        showNotification={showNotification}
-                        handleCloseNotification={this.handleCloseNotification}
-                        firstLine="No account exists for the requested"
-                        secondLine="email address."
-                    />
+                    <View style={styles.notificationWrapper}>
+                        <Notification
+                            type="Error"
+                            showNotification={showNotification}
+                            handleCloseNotification={this.handleCloseNotification}
+                            firstLine="No account exists for the requested"
+                            secondLine="email address."
+                        />
+                    </View>
                 </View>
                 <Loader
                     animationType="fade"
@@ -113,11 +114,15 @@ const styles = StyleSheet.create({
         display: 'flex',
         flex: 1,
     },
-    form: {
-        marginTop: 90,
-        paddingLeft: 20,
-        paddingRight: 20,
+    scrollViewWrapper: {
+        marginTop: 70,
         flex: 1,
+    },
+    scrollView: {
+        paddingLeft: 30,
+        paddingRight: 30,
+        paddingTop: 20,
+        flex: 1
     },
     forgotPasswordHeading: {
         fontSize: 28,
@@ -131,9 +136,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 60,
     },
-    nextButtonWrapper: {
-        alignItems: 'flex-end',
-        right: 20,
-        bottom: 20,
+    notificationWrapper: {
+        position: 'absolute',
+        bottom: 0,
     },
 });
