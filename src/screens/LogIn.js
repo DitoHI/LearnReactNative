@@ -1,19 +1,23 @@
 import React, {Component} from 'react';
 import {PropTypes} from 'prop-types';
 import {KeyboardAvoidingView, ScrollView, StyleSheet, Text, View,} from 'react-native';
+import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import { ActionCreators } from "../redux/actions";
 import colors from '../styles/colors';
 import InputField from '../components/forms/inputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
 import Loader from '../components/Loader';
 
-export default class logIn extends Component {
+class logIn extends Component {
     constructor(props) {
         super(props);
         this.state = {
             formValid: true,
             validEmail: false,
             emailAddress: '',
+            password: '',
             validPassword: false,
             loadingVisible: false,
         };
@@ -27,8 +31,8 @@ export default class logIn extends Component {
     handleNextButton() {
         this.setState({loadingVisible: true});
         setTimeout(() => {
-            if (this.state.emailAddress === 'hello@imandy.ie' && this.state.validPassword) {
-                alert('Success');
+            const { emailAddress, password } = this.state;
+            if (this.props.logIn(emailAddress, password)) {
                 this.setState({formValid: true, loadingVisible: false});
             } else {
                 this.setState({formValid: false, loadingVisible: false});
@@ -55,6 +59,7 @@ export default class logIn extends Component {
     }
 
     handlePasswordChange(password) {
+        this.setState({ password });
         if (!this.state.validPassword) {
             if (password.length > 4) { // at least 4 characters long
                 this.setState({validPassword: true});
@@ -74,6 +79,7 @@ export default class logIn extends Component {
         const showNotification = !formValid;
         const background = formValid ? colors.green01 : colors.darkOrange;
         const notificationMarginTop = showNotification ? 10 : 0;
+        console.log(this.props.loggedInStatus);
         return (
             <KeyboardAvoidingView
                 style={[{backgroundColor: background}, styles.wrapper]}
@@ -155,3 +161,15 @@ const styles = StyleSheet.create({
         bottom: 0,
     },
 });
+
+const mapStateToProps = (state) => {
+    return {
+        loggedInStatus: state.loggedInStatus,
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(ActionCreators, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(logIn);
