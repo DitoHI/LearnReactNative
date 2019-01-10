@@ -7,17 +7,15 @@
  */
 
 import React, {Component} from 'react';
-import {Provider} from 'react-redux';
-import store from './src/redux/store';
-import LoggedOut from './src/screens/LoggedOut';
-import LogIn from './src/screens/LogIn';
-import ForgotPassword from './src/screens/ForgotPassword';
+import { Provider } from 'react-redux';
+import { Root, configureStore } from './src/navigators/AppNavigator';
 
+console.disableYellowBox = true;
 export default class App extends Component {
     render() {
         return (
-            <Provider store={store}>
-                <LogIn/>
+            <Provider store={configureStore({})}>
+                <Root />
             </Provider>
         )
     }

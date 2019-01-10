@@ -9,8 +9,16 @@ import InputField from '../components/forms/inputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
 import Loader from '../components/Loader';
+import NavBarButton from "./LoggedOut";
+import transparentHeaderStyle from "../styles/navigation";
 
 class logIn extends Component {
+    static navigationOptions = ({navigation}) => ({
+        headerStyle: transparentHeaderStyle,
+        headerTransparent: true,
+        headerTintColor: colors.white,
+    });
+
     constructor(props) {
         super(props);
         this.state = {

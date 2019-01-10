@@ -3,8 +3,22 @@ import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RoundedButton from '../components/buttons/RoundedButton';
+import NavBarButton from '../components/buttons/NavBarButton';
+import transparentHeaderStyle from '../styles/navigation';
 
 export default class LoggedOut extends Component {
+    static navigationOptions = ({navigation}) => ({
+        headerRight: <NavBarButton
+            handleButtonPress={() => navigation.navigate('LogIn')}
+            location="right"
+            color={colors.white}
+            text="Log In"
+        />,
+        headerStyle: transparentHeaderStyle,
+        headerTransparent: true,
+        headerTintColor: colors.white,
+    });
+
     onFacebookPress() {
         alert('Facebook button pressed');
     }
