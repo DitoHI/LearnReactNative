@@ -38,10 +38,12 @@ class logIn extends Component {
 
     handleNextButton() {
         this.setState({loadingVisible: true});
+        const { navigate } = this.props.navigation;
         setTimeout(() => {
             const { emailAddress, password } = this.state;
             if (this.props.logIn(emailAddress, password)) {
                 this.setState({formValid: true, loadingVisible: false});
+                navigate('LoggedIn');
             } else {
                 this.setState({formValid: false, loadingVisible: false});
             }
@@ -91,7 +93,6 @@ class logIn extends Component {
         return (
             <KeyboardAvoidingView
                 style={[{backgroundColor: background}, styles.wrapper]}
-                // behavior="padding"
             >
                 <View style={styles.scrollViewWrapper}>
                     <ScrollView style={styles.scrollView}>
