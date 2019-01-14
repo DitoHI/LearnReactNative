@@ -10,7 +10,8 @@ import {
     Image,
     StyleSheet,
 } from 'react-native';
-import HearButton, {HeartButton} from '../buttons/HeartButton';
+import HeartButton from '../buttons/HeartButton';
+import Stars from '../Stars';
 import colors from '../../styles/colors';
 
 export default class Listings extends Component {
@@ -34,16 +35,22 @@ export default class Listings extends Component {
     }
 
     renderListings() {
-        const { listings, showAddToFav } = this.props;
+        const {listings, showAddToFav} = this.props;
         return listings.map((listing, index) => {
             return (
                 <TouchableHighlight
                     style={styles.card}
                 >
-                    <View style={styles.cardContent}>
+                    <View>
                         {showAddToFav ?
-                        <HeartButton/>
+                            <View style={styles.addToFavoriteBtn}>
+                                <HeartButton
+                                    color={colors.white}
+                                    selectedColor={colors.pink}
+                                />
+                            </View>
                             : null
+
                         }
                         <Image
                             style={styles.image}
@@ -57,6 +64,12 @@ export default class Listings extends Component {
                         >
                             {listing.title}
                         </Text>
+                        <Text style={styles.listingPrice}>£{listing.price} {listing.priceType}</Text>
+                        <Stars
+                            votes={listing.stars}
+                            size={18}
+                            color={colors.green02}
+                        />
                     </View>
                 </TouchableHighlight>
             );
@@ -129,7 +142,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         minHeight: 100,
     },
-    cardContent: {},
     image: {
         width: undefined,
         flex: 1,
@@ -145,6 +157,18 @@ const styles = StyleSheet.create({
     },
     listingType: {
         fontWeight: '700',
-
+    },
+    addToFavoriteBtn: {
+        position: 'absolute',
+        right: 12,
+        top: 7,
+        zIndex: 2,
+    },
+    listingPrice: {
+        color: colors.gray04,
+        marginTop: 4,
+        marginBottom: 2,
+        fontSize: 12,
+        fontWeight: '300',
     },
 });

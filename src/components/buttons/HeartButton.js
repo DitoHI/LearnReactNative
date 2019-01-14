@@ -7,28 +7,61 @@ import {
     StyleSheet,
 } from 'react-native';
 
-export class HeartButton extends Component {
+export default class HeartButton extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            addToFavorite: false
-        }
+            addedToFavorite: false
+        };
+        this.addToFavorite = this.addToFavorite.bind(this);
     }
 
     addToFavorite() {
-
+        this.setState({
+            addedToFavorite: !this.state.addedToFavorite
+        });
     }
 
     render() {
+        const {addedToFavorite} = this.state;
+        const {color, selectedColor} = this.props;
         return (
-            <TouchableOpacity>
+            <TouchableOpacity
+                onPress={this.addToFavorite}
+            >
                 <View>
                     <Icon
-                        name="heart"
+                        name={addedToFavorite ? 'heart' : 'heart-o'}
+                        color={addedToFavorite ? selectedColor : color}
+                        size={18}
+
+                    />
+                    <Icon
+                        name="heart-o"
+                        size={18}
+                        color={color}
+                        style={[
+                            {display: addedToFavorite ? 'flex' : 'none'},
+                            styles.selectedColor,
+                        ]}
                     />
                 </View>
             </TouchableOpacity>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    selectedColor: {
+        position: 'absolute',
+        left: 0,
+        top: 0,
+    }
+});
+
+HeartButton.propTypes = {
+    color: PropTypes.string.isRequired,
+    selectedColor: PropTypes.string.isRequired,
+    itemId: PropTypes.number.isRequired,
+};
