@@ -10,23 +10,53 @@ import {
     Image,
     StyleSheet,
 } from 'react-native';
+import HearButton, {HeartButton} from '../buttons/HeartButton';
 import colors from '../../styles/colors';
 
 export default class Listings extends Component {
+
+    constructor(props) {
+        super(props);
+        this.renderListings = this.renderListings.bind(this);
+    }
+
+    get randomColor() {
+        const colorsList = [
+            colors.gray04,
+            colors.darkOrange,
+            colors.black,
+            colors.brown01,
+            colors.blue,
+            colors.brown02,
+            colors.green01,
+        ];
+        return colorsList[Math.floor(Math.random() * colorsList.length)];
+    }
+
     renderListings() {
-        const { listings } = this.props;
+        const { listings, showAddToFav } = this.props;
         return listings.map((listing, index) => {
             return (
                 <TouchableHighlight
                     style={styles.card}
                 >
                     <View style={styles.cardContent}>
+                        {showAddToFav ?
+                        <HeartButton/>
+                            : null
+                        }
                         <Image
                             style={styles.image}
                             resizeMode="contain"
                             source={listing.photo}
                         />
-                        <Text>{listing.title}</Text>
+                        <Text style={[{color: this.randomColor}, styles.listingType]}>{listing.type}</Text>
+                        <Text
+                            style={styles.listingTitle}
+                            numberOfLines={2}
+                        >
+                            {listing.title}
+                        </Text>
                     </View>
                 </TouchableHighlight>
             );
@@ -34,11 +64,12 @@ export default class Listings extends Component {
     }
 
     render() {
-        const {title} = this.props;
+        const {title, boldTitle} = this.props;
+        const titleStyle = boldTitle ? {fontSize: 22, fontWeight: '600'} : {fontSize: 18};
         return (
             <View style={styles.wrapper}>
                 <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>{title}</Text>
+                    <Text style={[titleStyle, styles.title]}>{title}</Text>
                     <TouchableOpacity style={styles.seeAllBtn}>
                         <Text style={styles.seeAllBtnText}>See All</Text>
                         <Icon
@@ -89,6 +120,7 @@ const styles = StyleSheet.create({
     scrollView: {
         marginTop: 20,
         marginLeft: 15,
+        marginBottom: 40,
     },
     card: {
         marginRight: 6,
@@ -97,14 +129,22 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         minHeight: 100,
     },
-    cardContent: {
-
-    },
+    cardContent: {},
     image: {
         width: undefined,
         flex: 1,
         height: 100,
         borderRadius: 5,
         marginBottom: 7,
+    },
+    listingTitle: {
+        fontSize: 14,
+        fontWeight: '700',
+        color: colors.gray04,
+        marginTop: 2,
+    },
+    listingType: {
+        fontWeight: '700',
+
     },
 });

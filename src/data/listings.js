@@ -2,7 +2,7 @@ const listings = [
     {
         title: 'Experience',
         boldTitle: false,
-        showAddToFav: false,
+        showAddToFav: true,
         listings: [
             {
                 id: 1,
