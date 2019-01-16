@@ -9,11 +9,23 @@ import InputField from '../components/forms/inputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
 import Loader from '../components/Loader';
-import NavBarButton from "./LoggedOut";
+import NavBarButton from "../components/buttons/NavBarButton";
 import transparentHeaderStyle from "../styles/navigation";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 class logIn extends Component {
     static navigationOptions = ({navigation}) => ({
+        headerRight: <NavBarButton
+            handleButtonPress={() => navigation.navigate('ForgotPassword')}
+            location="right"
+            color={colors.white}
+            text="Forgot Password"
+        />,
+        headerLeft: <NavBarButton
+            handleButtonPress={() => navigation.goBack()}
+            location="left"
+            icon={<Icon name="angle-left" color={colors.white} size={30} />}
+        />,
         headerStyle: transparentHeaderStyle,
         headerTransparent: true,
         headerTintColor: colors.white,
