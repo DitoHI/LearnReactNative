@@ -10,6 +10,16 @@ import {
     Easing,
     Animated,
 } from 'react-native';
+import androidSize from '../helpers/utils';
+
+const size = androidSize();
+let notificationWidth = '100%';
+
+if (size === 'small') {
+    notificationWidth = 384;
+} else if (size === 'large') {
+    notificationWidth = 414;
+}
 
 export default class Notification extends Component {
     constructor(props) {
@@ -78,7 +88,7 @@ const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: colors.white,
         height: 60,
-        width: '100%',
+        width: notificationWidth,
         padding: 10,
     },
     notificationContent: {

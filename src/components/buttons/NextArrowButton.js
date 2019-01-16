@@ -8,6 +8,16 @@ import {
 import {PropTypes} from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import colors from '../../styles/colors';
+import androidSize from '../../helpers/utils';
+
+const size = androidSize();
+let buttonSize = 60;
+let buttonWrapperPadding = 0;
+
+if (size === 'small') {
+    buttonSize = 50;
+    buttonWrapperPadding = 20;
+}
 
 export default class NextArrowButton extends Component {
     render() {
@@ -42,13 +52,14 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         right: 20,
         bottom: 20,
+        paddingTop: buttonWrapperPadding,
     },
     button: {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 50,
-        width: 60,
-        height: 60,
+        width: buttonSize,
+        height: buttonSize,
         backgroundColor: colors.white,
     },
     icon: {

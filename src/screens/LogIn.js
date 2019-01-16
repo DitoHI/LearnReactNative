@@ -12,6 +12,14 @@ import Loader from '../components/Loader';
 import NavBarButton from "../components/buttons/NavBarButton";
 import transparentHeaderStyle from "../styles/navigation";
 import Icon from "react-native-vector-icons/FontAwesome";
+import androidSize from '../helpers/utils';
+
+const size = androidSize();
+let headingTextSize = 34;
+
+if (size === 'small') {
+    headingTextSize = 28;
+}
 
 class logIn extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -172,7 +180,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     loginHeader: {
-        fontSize: 34,
+        fontSize: headingTextSize,
         color: colors.white,
         fontWeight: '300',
         marginBottom: 40,
