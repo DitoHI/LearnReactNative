@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, TouchableHighlight, View,} from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import colors from '../../styles/colors';
 
 export default class RoundedButton extends Component {
@@ -9,14 +14,16 @@ export default class RoundedButton extends Component {
         const backgroundColor = background || 'transparent';
         const color = textColor || colors.black;
         return (
-            <TouchableHighlight
+            <TouchableOpacity
                 style={[{backgroundColor}, style.wrapper]}
-                onPress={handleOnPress} >
+                onPress={handleOnPress}
+                activeOpacity={0.7}
+            >
                 <View style={style.buttonTextWrapper}>
                     {icon}
                     <Text style={[{color}, style.buttonText]}>{text}</Text>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }

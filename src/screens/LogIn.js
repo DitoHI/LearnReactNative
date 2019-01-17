@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     scrollViewWrapper: {
         marginTop: 70,
         flex: 1,
+        padding: 0,
     },
     scrollView: {
         paddingLeft: 30,
@@ -188,6 +189,8 @@ const styles = StyleSheet.create({
     notificationWrapper: {
         position: 'absolute',
         bottom: 0,
+        left: 0,
+        right: 0,
     },
 });
 

@@ -10,16 +10,6 @@ import {
     Easing,
     Animated,
 } from 'react-native';
-import androidSize from '../helpers/utils';
-
-const size = androidSize();
-let notificationWidth = '100%';
-
-if (size === 'small') {
-    notificationWidth = 384;
-} else if (size === 'large') {
-    notificationWidth = 414;
-}
 
 export default class Notification extends Component {
     constructor(props) {
@@ -32,7 +22,7 @@ export default class Notification extends Component {
     }
 
     animateNotification(value) {
-        const { positionValue } = this.state;
+        const {positionValue} = this.state;
         Animated.timing(
             positionValue,
             {
@@ -53,12 +43,14 @@ export default class Notification extends Component {
     render() {
         const {type, firstLine, secondLine, showNotification} = this.props;
         showNotification ? this.animateNotification(0) : this.animateNotification(-60);
-        const { positionValue } = this.state;
+        const {positionValue} = this.state;
         return (
             <Animated.View style={[{marginBottom: positionValue}, styles.wrapper]}>
                 <View style={styles.notificationContent}>
-                    <Text style={styles.errorText}>{type}</Text>
-                    <Text style={styles.errorMessage}>{firstLine}</Text>
+                    <View style={styles.errorMessage}>
+                        <Text style={styles.errorText}>{type}</Text>
+                        <Text>{firstLine}</Text>
+                    </View>
                     <Text style={styles.errorMessage}>{secondLine}</Text>
                 </View>
                 <TouchableOpacity
@@ -86,13 +78,14 @@ Notification.propTypes = {
 
 const styles = StyleSheet.create({
     wrapper: {
+        flex: 1,
         backgroundColor: colors.white,
         height: 60,
-        width: notificationWidth,
         padding: 10,
     },
     notificationContent: {
-        flexDirection: 'row',
+        flex: 1,
+        flexDirection: 'column',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
     },
@@ -103,6 +96,8 @@ const styles = StyleSheet.create({
         marginBottom: 2,
     },
     errorMessage: {
+        flexDirection: 'row',
+        flex: 1,
         marginBottom: 2,
         fontSize: 14,
     },
@@ -110,5 +105,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 10,
+
     },
 });

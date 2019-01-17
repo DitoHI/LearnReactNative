@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {Image, StyleSheet, Text, TouchableHighlight, View} from 'react-native';
+import {
+    Image,
+    StyleSheet,
+    Text,
+    TouchableHighlight,
+    View,
+    ScrollView,
+} from 'react-native';
 import colors from '../styles/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RoundedButton from '../components/buttons/RoundedButton';
@@ -43,7 +50,7 @@ export default class LoggedOut extends Component {
 
     render() {
         return (
-            <View style={styles.wrapper}>
+            <ScrollView style={styles.wrapper}>
                 <View style={styles.welcomeWrapper}>
                     <Image
                         source={require('../img/airbnb-logo.png')}
@@ -88,7 +95,7 @@ export default class LoggedOut extends Component {
                         <Text style={styles.termsText}>.</Text>
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }

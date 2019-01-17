@@ -20,7 +20,6 @@ const LoggedInTabNavigator = createBottomTabNavigator({
         },
         activeTintColor: colors.pink,
     },
-
 });
 const App = createAppContainer(LoggedInTabNavigator);
 
