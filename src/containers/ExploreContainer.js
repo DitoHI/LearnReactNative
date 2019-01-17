@@ -13,17 +13,17 @@ import Listings from '../components/explore/Listings';
 import categoriesList from '../data/categories';
 import listings from '../data/listings';
 
-export default class InboxContainer extends Component {
-    static navigationOptions = {
-        tabBarLabel: 'EXPLORE',
-        tabBarIcon: ({tintColor}) => (
-            <Icon
-                name="search"
-                size={22}
-                color={tintColor}
-            />
-        ),
-    };
+export default class ExploreContainer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.handleAddToFav = this.handleAddToFav.bind(this);
+    }
+
+    handleAddToFav() {
+        const { navigate } = this.props.navigation;
+        navigate('CreateList');
+    }
 
     renderListings() {
         return listings.map((listing, index) => {
@@ -37,6 +37,7 @@ export default class InboxContainer extends Component {
                         boldTitle={listing.boldTitle}
                         listings={listing.listings}
                         showAddToFav={listing.showAddToFav}
+                        handleAddToFav={this.handleAddToFav}
                     />
                 </View>
             );

@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
         height: 40,
         marginLeft: 21,
         marginRight: 21,
+        marginTop: 21,
     },
     searchIcon: {
         position: 'absolute',

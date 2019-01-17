@@ -4,8 +4,7 @@ import LoggedInTabNavigatior from '../navigators/LoggedInTabNavigator';
 
 export default class LoggedIn extends Component {
     static navigationOptions = () => ({
-        headerLeft: null,
-        headerStyle: transparentHeaderStyle,
+        header: null,
         getsturesEnabled: false,
     });
     render() {

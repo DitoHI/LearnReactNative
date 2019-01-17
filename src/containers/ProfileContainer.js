@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export default class InboxContainer extends Component {
+export default class ProfileContainer extends Component {
     static navigationOptions = {
         tabBarLabel: 'PROFILE',
         tabBarIcon: ({ tintColor }) => (
@@ -30,7 +30,6 @@ export default class InboxContainer extends Component {
 const styles = StyleSheet.create({
     wrapper: {
         display: 'flex',
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingTop: 50,
     },
 });

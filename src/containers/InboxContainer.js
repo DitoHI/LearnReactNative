@@ -30,7 +30,6 @@ export default class InboxContainer extends Component {
 const styles = StyleSheet.create({
     wrapper: {
         display: 'flex',
-        paddingLeft: 30,
-        paddingRight: 30,
+        paddingTop: 50,
     },
 });
