@@ -8,10 +8,12 @@ import {
     StyleSheet,
 } from 'react-native';
 import Icon from "react-native-vector-icons/AntDesign";
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import colors from '../styles/colors';
 import NavBarButton from "../components/buttons/NavBarButton";
 import InputField from '../components/forms/InputField';
 import RadioInput from '../components/forms/RadioInput';
+import RoundedButton from "../components/buttons/RoundedButton";
 
 export default class CreateList extends Component {
     static navigationOptions = ({navigation}) => ({
@@ -28,16 +30,42 @@ export default class CreateList extends Component {
         super(props);
         this.state = {
             privacyOption: 'private',
+            location: props.navigation.state.params.listing.location,
+            loading: false,
         };
+        this.listCreated = false;
         this.selectPrivacyOption = this.selectPrivacyOption.bind(this);
+        this.handleLocationChange = this.handleLocationChange.bind(this);
+        this.handleCreateList = this.handleCreateList.bind(this);
+    }
+
+    componentWillUnmount() {
+        const {navigation} = this.props;
+        navigation.state.params.onCreateListClose(navigation.state.params.listing.id, this.listCreated);
+    }
+
+    handleLocationChange(location) {
+        this.setState({location});
     }
 
     selectPrivacyOption(privacyOption) {
-        this.setState({ privacyOption });
+        this.setState({privacyOption});
+    }
+
+    handleCreateList() {
+        const { goBack } = this.props.navigation;
+        this.setState({ loading: true });
+        this.listCreated = true;
+
+        setTimeout(() => {
+            this.setState({ loading: false }, () => {
+                goBack();
+            });
+        }, 2000);
     }
 
     render() {
-            const { privacyOption } = this.state;
+        const {privacyOption, location} = this.state;
         return (
             <View style={styles.wrapper}>
                 <ScrollView style={styles.scrollView}>
@@ -50,13 +78,14 @@ export default class CreateList extends Component {
                                 labelTextWeight="400"
                                 labelColor={colors.lightBlack}
                                 textColor={colors.lightBlack}
-                                placeholder="Some text..."
-                                value="Some value..."
+                                placeholder={location}
+                                defaultValue={location}
                                 showCheckmark={false}
-                                autoFocus={true}
+                                autoFocus={false}
                                 inputType="text"
                                 inputStyle={styles.inputStyle}
                                 borderBottomColor={colors.gray06}
+                                onChangeText={this.handleLocationChange}
                             />
                         </View>
                         <View style={styles.privacyOptions}>
@@ -64,11 +93,12 @@ export default class CreateList extends Component {
                             <TouchableHighlight
                                 style={styles.privacyOptionsItem}
                                 underlayColor={colors.gray01}
-                                onPress={ () => this.selectPrivacyOption('public') }
+                                onPress={() => this.selectPrivacyOption('public')}
                             >
                                 <View>
                                     <Text style={styles.privacyOptionsTitle}>Public</Text>
-                                    <Text style={styles.privacyOptionsDescription}>Visible to everyone and included on your public Airbnb profile.</Text>
+                                    <Text style={styles.privacyOptionsDescription}>Visible to everyone and included on
+                                        your public Airbnb profile.</Text>
                                     <View style={styles.privacyRadioInput}>
                                         <RadioInput
                                             backgroundColor={colors.gray07}
@@ -85,11 +115,12 @@ export default class CreateList extends Component {
                             <TouchableHighlight
                                 style={styles.privacyOptionsItem}
                                 underlayColor={colors.gray01}
-                                onPress={ () => this.selectPrivacyOption('private') }
+                                onPress={() => this.selectPrivacyOption('private')}
                             >
                                 <View>
                                     <Text style={styles.privacyOptionsTitle}>Private</Text>
-                                    <Text style={styles.privacyOptionsDescription}>Visible to only to you and any friends you invite.</Text>
+                                    <Text style={styles.privacyOptionsDescription}>Visible to only to you and any
+                                        friends you invite.</Text>
                                     <View style={styles.privacyRadioInput}>
                                         <RadioInput
                                             backgroundColor={colors.gray07}
@@ -105,6 +136,28 @@ export default class CreateList extends Component {
                         </View>
                     </View>
                 </ScrollView>
+                <View style={styles.createButton}>
+                    <RoundedButton
+                        text="Create"
+                        textColor={colors.white}
+                        textAlign="left"
+                        background={colors.green01}
+                        borderColor="transparent"
+                        iconPosition="right"
+                        disabled={!location}
+                        loading={this.state.loading}
+                        icon={
+                            <View style={styles.buttonIcon}>
+                                <FontAwesomeIcon
+                                    name="angle-right"
+                                    color={colors.white}
+                                    size={30}
+                                />
+                            </View>
+                        }
+                        handleOnPress={this.handleCreateList}
+                    />
+                </View>
             </View>
         );
     }
@@ -187,5 +240,17 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 0,
+    },
+    createButton: {
+        position: 'absolute',
+        bottom: 0,
+        right: 10,
+        width: 110,
+    },
+    buttonIcon: {
+        position: 'absolute',
+        right: 0,
+        top: '50%',
+        marginTop: -16,
     },
 });

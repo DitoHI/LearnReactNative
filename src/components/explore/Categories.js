@@ -11,14 +11,14 @@ import colors from '../../styles/colors';
 import androidSize from '../../helpers/utils';
 
 const size = androidSize();
-let cardSize = 100;
-let cardMargin = 8;
+let cardSize = 110;
+let cardMargin = 10;
 
 if (size === 'small') {
-    cardSize = 90;
-    cardMargin = 4;
+    cardSize = 95;
+    cardMargin = 6;
 } else if (size === 'large') {
-    cardSize = 115;
+    cardSize = 125;
 }
 
 export default class Categories extends Component {

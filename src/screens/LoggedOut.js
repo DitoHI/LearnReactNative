@@ -62,6 +62,7 @@ export default class LoggedOut extends Component {
                         textColor={colors.green01}
                         background={colors.white}
                         icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon}/>}
+                        iconPosition="right"
                         handleOnPress={this.onFacebookPress}
                     />
                     <RoundedButton
@@ -126,8 +127,8 @@ const styles = StyleSheet.create({
     },
     facebookButtonIcon: {
         color: colors.green01,
-        position: 'relative',
-        left: 20,
+        position: 'absolute',
+        right: 5,
         zIndex: 0,
     },
     moreOptionButton: {

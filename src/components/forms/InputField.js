@@ -10,8 +10,10 @@ export default class InputField extends Component {
         this.state = {
             secureInput: !(props.inputType === 'text' || props.inputType === 'email'),
             scaleCheckmarkValue: new Animated.Value(0),
+            inputValue: props.defaultValue,
         };
-        this.toogleShowPassword = this.toogleShowPassword.bind(this);
+        this.toggleShowPassword = this.toggleShowPassword.bind(this);
+        this.onChangeText = this.onChangeText.bind(this);
     }
 
     scaleCheckmark(value) {
@@ -25,10 +27,15 @@ export default class InputField extends Component {
         ).start();
     }
 
-    toogleShowPassword() {
+    toggleShowPassword() {
         this.setState({
             secureInput: !this.state.secureInput
         });
+    }
+
+    onChangeText(text) {
+        this.props.onChangeText(text);
+        this.setState({ inputValue: text });
     }
 
     render() {
@@ -49,7 +56,7 @@ export default class InputField extends Component {
             value,
             placeholder,
         } = this.props;
-        const {secureInput, scaleCheckmarkValue} = this.state;
+        const {secureInput, scaleCheckmarkValue, inputValue } = this.state;
         const fontSize = labelTextSize || 14;
         const fontWeight = labelTextWeight || '700';
         const color = labelColor || colors.white;
@@ -75,7 +82,7 @@ export default class InputField extends Component {
                 {inputType === 'password' ?
                     <TouchableOpacity
                         style={styles.showButton}
-                        onPress={() => this.toogleShowPassword()}
+                        onPress={() => this.toggleShowPassword()}
                     >
                         <Text style={styles.showButtonText}>{secureInput ? 'Show' : 'Hide'}</Text>
                     </TouchableOpacity>
@@ -91,13 +98,13 @@ export default class InputField extends Component {
                 <TextInput
                     style={[{color: inputColor, borderBottomColor: borderBottom}, inputStyle, styles.inputField]}
                     secureTextEntry={secureInput}
-                    onChangeText={onChangeText}
+                    onChangeText={this.onChangeText}
                     keyboardType={keyboardType}
                     autoFocus={autoFocus}
                     autoCapitalize={autoCapitalize}
                     autoCorrect={false}
                     underLineColorAndroid="transparent"
-                    // value={value}
+                    value={inputValue}
                     placeholder={placeholder}
                 />
             </View>
@@ -120,7 +127,7 @@ InputField.propTypes = {
     labelTextWeight: PropTypes.string,
     inputStyle: PropTypes.string,
     placeholder: PropTypes.string,
-    value: PropTypes.string,
+    defaultValue: PropTypes.string,
 };
 
 const styles = StyleSheet.create({
