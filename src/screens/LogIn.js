@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
 import { ActionCreators } from "../redux/actions";
 import colors from '../styles/colors';
-import InputField from '../components/forms/inputField';
+import InputField from '../components/forms/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
 import Notification from '../components/Notification';
 import Loader from '../components/Loader';
