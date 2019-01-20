@@ -59,16 +59,18 @@ export default class LoggedOut extends Component {
                     <Text style={styles.welcomeText}>Welcome to Airbnb</Text>
                     <RoundedButton
                         text="Continue with Facebook"
+                        textAlign="center"
                         textColor={colors.green01}
                         background={colors.white}
                         icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon}/>}
-                        iconPosition="right"
+                        iconPosition="left"
                         handleOnPress={this.onFacebookPress}
                     />
                     <RoundedButton
                         text="Create Account"
                         textColor={colors.white}
                         handleOnPress={this.onCreateAccountPress}
+                        textAlign="center"
                     />
                     <TouchableHighlight
                         style={styles.moreOptionButton}
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     facebookButtonIcon: {
         color: colors.green01,
         position: 'absolute',
-        right: 5,
+        left: 5,
         zIndex: 0,
     },
     moreOptionButton: {
