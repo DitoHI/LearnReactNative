@@ -13,7 +13,7 @@ import NextArrowButton from '../components/buttons/NextArrowButton';
 import Loader from '../components/Loader';
 import NavBarButton from "../components/buttons/NavBarButton";
 import transparentHeaderStyle from "../styles/navigation";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "@expo/vector-icons/FontAwesome";
 
 export default class ForgotPassword extends Component {
     static navigationOptions = ({navigation}) => ({

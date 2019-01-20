@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import colors from '../styles/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from '@expo/vector-icons/FontAwesome';
 import {
     View,
     Text,
@@ -48,16 +48,16 @@ const styles = StyleSheet.create({
         height: 40,
         marginLeft: 21,
         marginRight: 21,
-        marginTop: 21,
+        marginTop: 28,
     },
     searchIcon: {
         position: 'absolute',
-        left: 18,
-        top: 9,
+        left: 16,
+        top: 7,
     },
     textInput: {
         display: 'flex',
-        marginTop: 11,
+        marginTop: 8,
         marginLeft: 44,
         color: colors.gray02,
     },

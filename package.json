@@ -2,15 +2,20 @@
   "name": "AirbnbClone",
   "version": "0.0.1",
   "private": true,
+  "main": "./node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "expo start",
+    "stop": "expo eject",
+    "android": "expo android",
+    "ios": "expo ios",
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.6.1",
+    "@expo/vector-icons": "github:expo/vector-icons",
+    "expo": "^32.0.1",
+    "react": "^16.7.0",
     "react-native": "0.57.7",
     "react-native-gesture-handler": "^1.0.12",
-    "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^3.0.9",
     "react-navigation-redux-helpers": "^2.0.9",
     "react-redux": "^6.0.0",
@@ -19,12 +24,11 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-jest": "23.6.0",
-    "jest": "23.6.0",
-    "metro-react-native-babel-preset": "0.50.0",
+    "jest-expo": "32.0.0",
+    "react-native-scripts": "^2.0.1",
     "react-test-renderer": "16.6.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo"
   }
 }

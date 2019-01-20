@@ -11,7 +11,7 @@ import Notification from '../components/Notification';
 import Loader from '../components/Loader';
 import NavBarButton from "../components/buttons/NavBarButton";
 import transparentHeaderStyle from "../styles/navigation";
-import Icon from "react-native-vector-icons/FontAwesome";
+import Icon from "@expo/vector-icons/FontAwesome";
 import androidSize from '../helpers/utils';
 
 const size = androidSize();

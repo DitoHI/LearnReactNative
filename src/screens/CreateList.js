@@ -7,8 +7,7 @@ import {
     TouchableHighlight,
     StyleSheet,
 } from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import { AntDesign, FontAwesome } from '@expo/vector-icons'
 import colors from '../styles/colors';
 import NavBarButton from "../components/buttons/NavBarButton";
 import InputField from '../components/forms/InputField';
@@ -21,7 +20,7 @@ export default class CreateList extends Component {
             <NavBarButton
                 handleButtonPress={() => navigation.goBack()}
                 location="left"
-                icon={<Icon name="close" color={colors.lightBlack} size={30}/>}
+                icon={<AntDesign name="close" color={colors.lightBlack} size={30}/>}
             />,
         headerStyle: styles.headerStyle,
     });
@@ -148,7 +147,7 @@ export default class CreateList extends Component {
                         loading={this.state.loading}
                         icon={
                             <View style={styles.buttonIcon}>
-                                <FontAwesomeIcon
+                                <FontAwesome
                                     name="angle-right"
                                     color={colors.white}
                                     size={30}

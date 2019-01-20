@@ -6,7 +6,7 @@ import {
     View,
 } from 'react-native';
 import {PropTypes} from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from '@expo/vector-icons/FontAwesome';
 import colors from '../../styles/colors';
 import androidSize from '../../helpers/utils';
 

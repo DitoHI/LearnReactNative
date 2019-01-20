@@ -6,7 +6,6 @@ import {
     ScrollView,
 } from 'react-native';
 import colors from '../styles/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/explore/Categories';
 import Listings from '../components/explore/Listings';
@@ -92,9 +91,10 @@ const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
         backgroundColor: colors.white,
+        marginTop: 20,
     },
     scrollView: {
-        paddingTop: 80,
+        paddingTop: 100,
     },
     scrollViewContent: {
         paddingBottom: 80,

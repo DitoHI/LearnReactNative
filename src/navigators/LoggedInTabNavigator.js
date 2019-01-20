@@ -12,7 +12,7 @@ import SavedContainer from '../containers/SavedContainer';
 import TripsContainer from '../containers/TripsContainer';
 import CreateList from '../screens/CreateList';
 import colors from '../styles/colors';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
 const ExploreTab = createStackNavigator({
     ExploreContainer: {
@@ -58,13 +58,37 @@ const LoggedInTabNavigator = createBottomTabNavigator({
         screen: ExploreTab,
         navigationOptions: {
             tabBarLabel: 'EXPLORE',
-            tabBarIcon: CustomTabBarIcon('search', 22, FontAwesomeIcon),
+            tabBarIcon: CustomTabBarIcon('search', 22, FontAwesome),
         }
     },
-    Saved: {screen: SavedContainer},
-    Trips: {screen: TripsContainer},
-    Inbox: {screen: InboxContainer},
-    Profile: {screen: ProfileContainer},
+    Saved: {
+        screen: SavedContainer,
+        navigationOptions: {
+            tabBarLabel: 'SAVED',
+            tabBarIcon: CustomTabBarIcon('heart-o', 22, FontAwesome),
+        },
+    },
+    Trips: {
+        screen: TripsContainer,
+        navigationOptions: {
+            tabBarLabel: 'TRIPS',
+            tabBarIcon: CustomTabBarIcon('logo-ionic', 22, Ionicons),
+        },
+    },
+    Inbox: {
+        screen: InboxContainer,
+        navigationOptions: {
+            tabBarLabel: 'INBOX',
+            tabBarIcon: CustomTabBarIcon('inbox', 25, FontAwesome),
+        },
+    },
+    Profile: {
+        screen: ProfileContainer,
+        navigationOptions: {
+            tabBarLabel: 'PROFILE',
+            tabBarIcon: CustomTabBarIcon('user-o', 22 , FontAwesome),
+        },
+    },
 }, {
     tabBarOptions: {
         labelStyle: {
@@ -73,7 +97,9 @@ const LoggedInTabNavigator = createBottomTabNavigator({
         },
         activeTintColor: colors.pink,
     },
+    tabBarPosition: 'bottom',
 });
+
 const App = createAppContainer(LoggedInTabNavigator);
 
 export default App;
