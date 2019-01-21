@@ -1,7 +1,23 @@
 {
-  "name": "AirbnbClone",
-  "displayName": "AirbnbClone",
   "expo": {
-    "sdkVersion" : "31.0.0"
+    "name": "AirbnbClone",
+    "icon": "./assets/icons/apps/AppIcon-512pt-1.png",
+    "version": "0.0.1",
+    "slug": "AirbnbClone",
+    "sdkVersion": "31.0.0",
+    "android": {
+      "package": "com.hafizhdeveloper.airbnbclone"
+    },
+    "assetBundlePatterns": [
+      "./assets/icons/apps/*.png",
+      "./src/img/*.png",
+      "./src/img/*.gif"
+    ],
+    "packagerOpts": {
+      "assetExts": [
+        "png",
+        "gif"
+      ]
+    }
   }
 }

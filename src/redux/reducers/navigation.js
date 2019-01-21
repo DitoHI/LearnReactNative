@@ -1,19 +1,28 @@
-import CreateReducer from '../helpers/createReducer';
-import { NavigationActions } from 'react-navigation';
-import AppRouteConfig from '../../navigators/AppRouteConfig';
 import { StatusBar } from 'react-native';
+import createReducer from '../helpers/createReducer';
+import * as types from '../actions/types';
+import AppRouteConfigs from '../../navigators/AppRouteConfig';
 
-const firstAction = AppRouteConfig.router.getActionForPathAndParams('LoggedOut');
-const initialState = AppRouteConfig.router.getStateForAction(firstAction);
+const firstAction = AppRouteConfigs.router.getActionForPathAndParams('LoggedOut');
+const initialNavState = AppRouteConfigs.router.getStateForAction(firstAction);
 
-export const nav = (state = initialState, action) => {
-    let nextState = AppRouteConfig.router.getStateForAction(action, state);
+const loggedInStatus = createReducer({}, {
+    [types.SET_LOGGED_IN_STATE](state, action) {
+        return action;
+    },
+});
 
-    if (action.routeName === 'TurnOnNotification' || action.routeName === 'LoggedIn') {
+const nav = (state = initialNavState, action) => {
+    const nextState = AppRouteConfigs.router.getStateForAction(action, state);
+
+    if (action.routeName === 'TurnOnNotifications' || action.routeName === 'LoggedIn') {
         StatusBar.setBarStyle('dark-content', true);
-    } else if (typeof action.routeName === 'undefined' || action.routeName === 'LoggedOut') {
-        StatusBar.setBarStyle('light-content', true);
     }
 
     return nextState || state;
+};
+
+export {
+    loggedInStatus,
+    nav,
 };

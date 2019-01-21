@@ -24,7 +24,7 @@ if (size === 'small') {
 }
 
 export default class LoggedOut extends Component {
-    static navigationOptions = ({navigation}) => ({
+    static navigationOptions = ({ navigation }) => ({
         headerRight: <NavBarButton
             handleButtonPress={() => navigation.navigate('LogIn')}
             location="right"

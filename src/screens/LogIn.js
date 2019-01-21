@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import {KeyboardAvoidingView, ScrollView, StyleSheet, Text, View,} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";
-import { ActionCreators } from "../redux/actions";
+import ActionCreators from "../redux/actions";
 import colors from '../styles/colors';
 import InputField from '../components/forms/InputField';
 import NextArrowButton from '../components/buttons/NextArrowButton';
@@ -21,7 +21,7 @@ if (size === 'small') {
     headingTextSize = 28;
 }
 
-class logIn extends Component {
+class LogIn extends Component {
     static navigationOptions = ({navigation}) => ({
         headerRight: <NavBarButton
             handleButtonPress={() => navigation.navigate('ForgotPassword')}
@@ -194,14 +194,10 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = (state) => {
-    return {
-        loggedInStatus: state.loggedInStatus,
-    }
-};
+const mapStateToProps = state => ({
+    loggedInStatus: state.loggedInStatus,
+});
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators(ActionCreators, dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators(ActionCreators, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(logIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
