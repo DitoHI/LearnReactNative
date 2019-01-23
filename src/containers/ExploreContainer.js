@@ -1,10 +1,12 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
     StyleSheet,
     ScrollView,
 } from 'react-native';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import colors from '../styles/colors';
 import SearchBar from '../components/SearchBar';
 import Categories from '../components/explore/Categories';
@@ -12,8 +14,7 @@ import Listings from '../components/explore/Listings';
 import categoriesList from '../data/categories';
 import listings from '../data/listings';
 
-export default class ExploreContainer extends Component {
-
+class ExploreContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -32,7 +33,7 @@ export default class ExploreContainer extends Component {
         const index = favouriteListings.indexOf(listing.id);
         if (index > -1) {
             favouriteListings = favouriteListings.filter(item => item !== listing.id);
-            this.setState({favouriteListings});
+            this.setState({ favouriteListings });
         } else {
             navigate('CreateList', { listing, onCreateListClose: this.onCreateListClose });
         }
@@ -69,23 +70,25 @@ export default class ExploreContainer extends Component {
     }
 
     render() {
+        const { data } = this.props;
+        console.log(data.multipleListings);
         return (
             <View style={styles.wrapper}>
-                <SearchBar/>
+                <SearchBar />
                 <ScrollView
                     style={styles.scrollView}
                     contentContainerStyle={styles.scrollViewContent}
                 >
                     <Text style={styles.heading}>Explore Airbnb</Text>
                     <View style={styles.categories}>
-                        <Categories categories={categoriesList}/>
+                        <Categories categories={categoriesList} />
                     </View>
                     {this.renderListings()}
                 </ScrollView>
             </View>
         );
     }
-};
+}
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -110,3 +113,15 @@ const styles = StyleSheet.create({
         color: colors.gray04,
     },
 });
+
+const ListingsQuery = gql`
+    query {
+        multipleListings{
+            title,
+            description
+        }
+    }
+`;
+
+const ExploreContainerWrapper = graphql(ListingsQuery)(ExploreContainer);
+export default ExploreContainerWrapper;

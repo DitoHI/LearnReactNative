@@ -1,0 +1,1 @@
+    export const NETWORK_INTERFACE = 'http://192.168.0.19:8080/graphql';
